@@ -15,6 +15,11 @@ public class HomePage {
         driver.findElement(By.linkText(linkText)).click();
     }
 
+    public ShiftingContentPage clickShiftingContent() {
+        clickLink("Shifting Content");
+        return new ShiftingContentPage(driver);
+    }
+
     public LoginPage clickFormAuthentication() {
         clickLink("Form Authentication");
         return new LoginPage(driver);
