@@ -8,7 +8,7 @@ import static org.testng.Assert.assertEquals;
 public class FrameTests extends BaseTests {
 
     @Test
-    public void testWysiwyg(){
+    public void testWysiwyg() {
         var editorPage = homePage.clickWysiwygEditor();
         editorPage.clearTextArea();
 

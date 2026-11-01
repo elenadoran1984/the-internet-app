@@ -31,10 +31,13 @@ Advanced topics like navigating multiple open tabs within a browser, as well as 
 How to write custom actions using JavaScript.
 
 **Setup Environment:**
-
-Java SE 10+
-
 IntelliJ
+
+Maven
+
+Java SE ~~10+~~ 21
+
+Selenium ~~3~~ 4
 
 Chrome Driver
 

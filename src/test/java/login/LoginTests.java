@@ -13,8 +13,8 @@ public class LoginTests extends BaseTests {
     @Test
     public void testSuccessfulLogin(){
         LoginPage loginPage =  homePage.clickFormAuthentication();
-        loginPage.setUsername("tomsmith");
-        loginPage.setPassword("SuperSecretPassword!");
+        loginPage.setUsername("username");
+        loginPage.setPassword("password");
         SecureAreaPage secureAreaPage = loginPage.clickLoginButton();
         assertTrue(secureAreaPage.getAlertText()
                 .contains("You logged into a secure area!"),
