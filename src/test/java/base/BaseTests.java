@@ -1,12 +1,11 @@
 package base;
 
 import com.google.common.io.Files;
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.events.EventFiringDecorator;
+import org.openqa.selenium.support.events.WebDriverListener;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -22,14 +21,15 @@ import java.io.IOException;
 
 public class BaseTests {
 
-    private EventFiringWebDriver driver;
+    private WebDriver  driver;
     protected HomePage homePage;
 
     @BeforeClass
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
-        driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
-        driver.register(new EventReporter());
+        driver = new ChromeDriver(getChromeOptions());
+        WebDriverListener listener = new EventReporter();
+        driver = new EventFiringDecorator(listener).decorate(driver);
         goHome();
         //setCookie();
     }
@@ -62,11 +62,10 @@ public class BaseTests {
         return new WindowManager(driver);
     }
 
-    private ChromeOptions getChromeOptions(){
+    private ChromeOptions getChromeOptions() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("disable-infobars");
-        //Here the browser is not opened when running tests
-        //options.setHeadless(true);
+        options.addArguments("--disable-infobars");
+        //options.addArguments("--headless");
         return options;
     }
 

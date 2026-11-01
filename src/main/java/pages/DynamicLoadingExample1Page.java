@@ -22,11 +22,11 @@ public class DynamicLoadingExample1Page {
 
     public void clickStart(){
         driver.findElement(startButton).click();
-//        WebDriverWait wait = new WebDriverWait(driver, 5);
-//        wait.until(ExpectedConditions.invisibilityOf(
-//                driver.findElement(loadingIndicator)));
-        FluentWait wait = new FluentWait(driver).withTimeout(Duration.ofSeconds(5)).pollingEvery(Duration.ofSeconds(1)).ignoring(NoSuchElementException.class);
-        wait.until(ExpectedConditions.invisibilityOf(driver.findElement(loadingIndicator)));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.invisibilityOf(
+                driver.findElement(loadingIndicator)));
+//        FluentWait wait = new FluentWait(driver).withTimeout(Duration.ofSeconds(5)).pollingEvery(Duration.ofSeconds(1)).ignoring(NoSuchElementException.class);
+//        wait.until(ExpectedConditions.invisibilityOf(driver.findElement(loadingIndicator)));
     }
 
     public String getLoadedText(){
