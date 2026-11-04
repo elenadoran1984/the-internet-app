@@ -1,6 +1,6 @@
 package base;
 
-import com.google.common.io.Files;
+//import com.google.common.io.Files;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -18,6 +18,12 @@ import utils.WindowManager;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 public class BaseTests {
 
@@ -46,17 +52,29 @@ public class BaseTests {
     }
 
     @AfterMethod
-    public void recordFailure(ITestResult result){
-        if(ITestResult.FAILURE == result.getStatus()){
-            var camera = (TakesScreenshot)driver;
+    public void recordFailure(ITestResult result) {
+        if (result.getStatus() == ITestResult.FAILURE) {
+            var camera = (TakesScreenshot) driver;
             File screenshot = camera.getScreenshotAs(OutputType.FILE);
+
             try {
-                Files.move(screenshot, new File("resources/screenshots/" + result.getName() + ".png"));
-            }catch(IOException e){
+                Path screenshotDirectory = Paths.get("resources", "screenshots");
+                Files.createDirectories(screenshotDirectory);
+
+                Path screenshotPath = screenshotDirectory.resolve(result.getName() + ".png");
+
+                Files.move(
+                        screenshot.toPath(),
+                        screenshotPath,
+                        StandardCopyOption.REPLACE_EXISTING
+                );
+
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
 
     public WindowManager getWindowManager(){
         return new WindowManager(driver);

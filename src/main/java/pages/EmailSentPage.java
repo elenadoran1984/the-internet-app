@@ -1,7 +1,11 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class EmailSentPage {
 
@@ -13,11 +17,20 @@ public class EmailSentPage {
         this.driver = driver;
     }
 
-    public String getMessage() {
-        return driver.findElement(contentArea).getText();
-    }
-
     public String getError() {
         return driver.findElement(errorServer).getText();
+    }
+
+    public String getMessage() {
+        WebDriverWait wait =
+                new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        return wait.until(webDriver -> {
+            try {
+                return webDriver.findElement(contentArea).getText();
+            } catch (StaleElementReferenceException e) {
+                return null;
+            }
+        });
     }
 }
