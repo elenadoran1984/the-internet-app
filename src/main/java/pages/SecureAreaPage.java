@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class SecureAreaPage {
 
     private WebDriver driver;
-    private By statusAlert = By.id("flash");
+    private By statusAlert = By.xpath("//*[@id=\"flash\"]");
 
     public SecureAreaPage(WebDriver driver){
         this.driver = driver;

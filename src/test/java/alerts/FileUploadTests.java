@@ -10,7 +10,7 @@ public class FileUploadTests extends BaseTests {
     @Test
     public void testFileUpload(){
         var uploadPage = homePage.clickFileUpload();
-        uploadPage.uploadFile("path_driver");
-        assertEquals(uploadPage.getUploadedFiles(), "chromedriver.exe", "Uploaded failed");
+        uploadPage.uploadFile("C:\\Users\\Elena\\Desktop\\the-internet-app\\resources\\testSuccessfulLogin.png");
+        assertEquals(uploadPage.getUploadedFiles(), "testSuccessfulLogin.png", "Uploaded failed");
     }
 }
