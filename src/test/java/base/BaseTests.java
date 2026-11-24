@@ -82,8 +82,11 @@ public class BaseTests {
 
     private ChromeOptions getChromeOptions() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-infobars");
-        //options.addArguments("--headless");
+        //options.addArguments("--headless=new");
+        options.addArguments("--disable-notifications");
+        options.addArguments("--disable-popup-blocking");
+        options.addArguments("--disable-gpu");
+        //options.addArguments("--window-size=1920,1080");
         return options;
     }
 
