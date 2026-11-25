@@ -32,7 +32,7 @@ public class BaseTests {
 
     @BeforeClass
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
         driver = new ChromeDriver(getChromeOptions());
         WebDriverListener listener = new EventReporter();
         driver = new EventFiringDecorator(listener).decorate(driver);
@@ -86,7 +86,7 @@ public class BaseTests {
         options.addArguments("--disable-notifications");
         options.addArguments("--disable-popup-blocking");
         options.addArguments("--disable-gpu");
-        //options.addArguments("--window-size=1920,1080");
+        options.addArguments("--window-size=1920,1080");
         return options;
     }
 
